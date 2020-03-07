@@ -1,7 +1,7 @@
 import log from '../log'
 import CONSTANTS from '../constants'
 
-export default function delayTask(id:number, delayTimeInMills: number) : Promise<string>  {
+export default function delayTask(id:number, delayTimeInMills: number)  {
 
     let result = CONSTANTS.UNKNOWN.toString()
     log.info('starting delay task with id: '+id)
