@@ -1,3 +1,5 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import { expose } from "threads/worker"
 import {TaskInterface, DelayTaskConfig} from '../taskInterfaces'
 import CONSTANTS from '../constants'

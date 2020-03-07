@@ -1,6 +1,8 @@
 import { spawn, Pool, Worker } from "threads"
 import log from './log'
 import TaskConfig from './taskConfig'
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 export default class Main {
 
@@ -23,7 +25,7 @@ export default class Main {
     const taskStatus = new Map()
     log.info('running tasks');
     const tasks = this.taskConfig.getTasks()
-    const pool = Pool(() => spawn(new Worker("./tasks/taskRunner")), {concurrency: this.taskConfig.getMaxParallelTasks()})
+    const pool = Pool(() => spawn(new Worker("./tasks/taskRunner"), {timeout: 20000}), {concurrency: this.taskConfig.getMaxParallelTasks()})
     for(let i=0; i < tasks.length; i++) {
         pool.queue(async worker => {
           const task = tasks[i]
