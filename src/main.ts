@@ -32,8 +32,9 @@ export default class Main {
   
   private async run(){
     const taskStatus = new Map()
-    log.info('running tasks');
+    
     const tasks = this.taskConfig.getTasks();
+    log.info('running tasks '+tasks.length);
     const poolOptions = {concurrency: this.taskConfig.getMaxParallelTasks()};
     const pool = Pool(this.spawnWorkerFn, poolOptions);
     for(let i=0; i < tasks.length; i++) {
@@ -41,8 +42,15 @@ export default class Main {
          await this.workerExec(worker,tasks[i], tasks[i].id || i, taskStatus)
         })        
     }   
-    await pool.completed()
-    await pool.terminate() 
-    this.taskConfig.writeStatus(taskStatus)
+    try{
+      await pool.settled()
+      await pool.terminate() 
+    } catch(err){
+      log.error(err)
+    } finally {
+      this.taskConfig.writeStatus(taskStatus)
+    }
+
+    
   }
 }
