@@ -11,28 +11,33 @@ import log from '../log'
  * @param task 
  * @param id 
  */
-async function runTask(task: TaskInterface, id: number) : Promise<string>{
-    let result = CONSTANTS.SKIPPED.toString()
-    if(!task) {
-        log.error('Invalid arguments ')
-        return new Promise((reject) => reject(result))        
-    }
-    log.info('runtask started')
+ function runTask(task: TaskInterface, id: number) : Promise<string>{
 
-    /**
-     * Determine what type of task is executing
-     */
-    if(task.type === 'delay') {
-        try {
-            result = await delayTask(id, (task.config as DelayTaskConfig).delayMilliSeconds)
-        } catch(err) {
-            log.error('failed executing '+id)
-            return new Promise((reject) => reject(result))
+    return new Promise((resolve, reject) => {
+        let result = CONSTANTS.SKIPPED.toString()
+        if(!task) {
+            log.error('Invalid arguments ')
+            reject(result)        
         }
-        
-      }
-      log.info(' result is ' + result)   
-      return new Promise((resolve) => resolve(result))
+        log.info('runtask started: ' + task.type )
+    
+        /**
+         * Determine what type of task is executing
+         */
+        if(task.type === 'delay') {
+            delayTask(id, (task.config as DelayTaskConfig).delayMilliSeconds)
+            .then(res => {
+                resolve(res)
+            }).catch(err => {
+                log.error(err, 'failed executing '+id)
+                reject(result)      
+            })
+          } else {
+            log.info(' result is ' + result)   
+            resolve(result)
+          }
+    })
+ 
 }
 
 expose(runTask)
