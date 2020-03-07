@@ -11,7 +11,7 @@ import log from '../log'
  * @param task 
  * @param id 
  */
- function runTask(task: TaskInterface, id: number) : Promise<string>{
+ expose(function runTask(task: TaskInterface, id: number) : Promise<string>{
 
     return new Promise((resolve, reject) => {
         let result = CONSTANTS.SKIPPED.toString()
@@ -44,6 +44,4 @@ import log from '../log'
 
     })
  
-}
-
-expose(runTask)
+})

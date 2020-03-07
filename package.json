@@ -1,8 +1,8 @@
 {
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "build": "babel ./src --out-dir lib --extensions \".ts,.tsx\"",
-    "start": "node lib/index.js"
+    "start": "DEBUG=threads:* node lib/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.4",
