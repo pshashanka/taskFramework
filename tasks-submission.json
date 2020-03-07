@@ -1,0 +1,109 @@
+{
+    "maxParallel": 3,
+    "taskResultsFile": "./status.json",
+    "tasks": [
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+		},
+		{
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+		},
+		{
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+		},
+		{
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },
+        {
+            "type": "delay",
+            "config": {
+                "delayMilliSeconds": 3000
+            }
+        },						
+        {
+            "type": "copy",
+            "config": {
+                "localFile": "abc.json",
+                "remoteLocation": "s3://mybucket.aws.com/"
+            }
+        }
+    ]
+}
