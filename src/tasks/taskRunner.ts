@@ -15,27 +15,33 @@ import log from '../log'
 
     return new Promise((resolve, reject) => {
         let result = CONSTANTS.SKIPPED.toString()
-        if(!task) {
-            log.error('Invalid arguments ')
-            reject(result)        
-        }
-        log.info('runtask started: ' + task.type )
-    
-        /**
-         * Determine what type of task is executing
-         */
-        if(task.type === 'delay') {
-            delayTask(id, (task.config as DelayTaskConfig).delayMilliSeconds)
-            .then(res => {
-                resolve(res)
-            }).catch(err => {
-                log.error(err, 'failed executing '+id)
-                reject(result)      
-            })
-          } else {
-            log.info(' result is ' + result)   
-            resolve(result)
+        try{
+          if(!task) {
+              log.error('Invalid arguments ')
+              reject(result)        
           }
+          log.info('runtask started: ' + task.type )
+      
+          /**
+           * Determine what type of task is executing
+           */
+          if(task.type === 'delay') {
+              delayTask(id, (task.config as DelayTaskConfig).delayMilliSeconds)
+              .then(res => {
+                  resolve(res)
+              }).catch(err => {
+                  log.error(err, 'failed executing '+id)
+                  reject(result)      
+              })
+            } else {
+              log.info(' result is ' + result)   
+              resolve(result)
+            }
+        } catch(err) {
+          console.error(err);
+          reject(err)
+        }
+
     })
  
 }

@@ -24,8 +24,10 @@ export default class Main {
   private async run(){
     const taskStatus = new Map()
     log.info('running tasks');
-    const tasks = this.taskConfig.getTasks()
-    const pool = Pool(() => spawn(new Worker("./tasks/taskRunner"), {timeout: 20000}), {concurrency: this.taskConfig.getMaxParallelTasks()})
+    const tasks = this.taskConfig.getTasks();
+    const spawnWorker = () => spawn(new Worker("./tasks/taskRunner"), {timeout: 20000});
+    const poolOptions = {concurrency: this.taskConfig.getMaxParallelTasks()};
+    const pool = Pool(spawnWorker, poolOptions);
     for(let i=0; i < tasks.length; i++) {
         pool.queue(async worker => {
           const task = tasks[i]
