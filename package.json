@@ -1,5 +1,5 @@
 {
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "build": "babel ./src --out-dir lib --extensions \".ts,.tsx\"",
     "start": "DEBUG=threads:* node lib/index.js"
