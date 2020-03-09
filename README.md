@@ -2,8 +2,9 @@
 
 ## Steps to run
 1. Install Node v10
-2. Run as 
+2. Install dependencies as 
 `npm install`
+3. Run as 
 `npm start`
 
 ## Input/Output
